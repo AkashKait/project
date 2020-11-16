@@ -17,27 +17,27 @@ class SongWidget extends StatelessWidget {
           SongInfo song = songList[songIndex];
           if (song.displayName.contains(".mp3"))
             return GestureDetector(
-                onTap: () {
-                  audioManagerInstance
-                      .start("file://${song.filePath}", song.title,
-                      desc: song.displayName,
-                      auto: true,
-                      cover: "assets/images/p4.jpg")
-                      .then((err) {
-                    print(err);
-                  });
-                },
+              onTap: () {
+                audioManagerInstance
+                    .start("file://${song.filePath}", song.title,
+                        desc: song.displayName,
+                        auto: true,
+                        cover: "assets/images/p4.jpg")
+                    .then((err) {
+                  print(err);
+                });
+              },
               child: Card(
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: <Widget>[
-                      new Image.asset(
-                          'assets/images/p2.jpg',
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
+                      Image.asset(
+                        'assets/images/p1.jpg',
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.793,
@@ -50,7 +50,6 @@ class SongWidget extends StatelessWidget {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-
                                 children: <Widget>[
                                   Text(song.title,
                                       style: TextStyle(

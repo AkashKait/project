@@ -30,29 +30,21 @@ class _MyAppState extends State<MyApp> {
         case AudioManagerEvents.seekComplete:
           _slider = audioManagerInstance.position.inMilliseconds /
               audioManagerInstance.duration.inMilliseconds;
-          setState(() {
-
-          });
+          setState(() {});
           break;
         case AudioManagerEvents.playstatus:
           isPlaying = audioManagerInstance.isPlaying;
-          setState(() {
-
-          });
+          setState(() {});
           break;
         case AudioManagerEvents.timeupdate:
           _slider = audioManagerInstance.position.inMilliseconds /
               audioManagerInstance.duration.inMilliseconds;
           audioManagerInstance.updateLrc(args["position"].toString());
-          setState(() {
-
-          });
+          setState(() {});
           break;
         case AudioManagerEvents.ended:
           audioManagerInstance.next();
-          setState(() {
-
-          });
+          setState(() {});
           break;
         default:
           break;
@@ -71,33 +63,35 @@ class _MyAppState extends State<MyApp> {
         drawer: Drawer(),
         appBar: AppBar(
           actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    showVol = !showVol;
-                  });
-                },
-                child: IconText(
-                    textColor: Colors.white,
-                    iconColor: Colors.white,
-                    string: "volume",
-                    iconSize: 20,
-                    iconData: Icons.volume_down),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  showVol = !showVol;
+                });
+              },
+              child: IconText(
+                textColor: Colors.white,
+                iconColor: Colors.white,
+                string: "",
+                iconSize: 30,
+                iconData: Icons.volume_up_outlined,
               ),
-            )
+            ),
           ],
           elevation: 0,
           backgroundColor: Colors.black,
           title: showVol
-              ? Slider(
-                  value: audioManagerInstance.volume ?? 0,
-                  onChanged: (value) {
-                    setState(() {
-                      audioManagerInstance.setVolume(value, showVolume: true);
-                    });
-                  },
+              ? Container(
+                  height: 50,
+                  child: Slider(
+                    value: audioManagerInstance.volume ?? 0,
+                    onChanged: (value) {
+                      setState(() {
+                        audioManagerInstance.setVolume(value, showVolume: true);
+                      });
+                      Text("volume");
+                    },
+                  ),
                 )
               : Text("Hertz"),
         ),
@@ -135,10 +129,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            Expanded(
-                flex: 2,
-                child: bottomPanel()
-            ),
+            Expanded(flex: 2, child: bottomPanel()),
           ],
         ),
       ),
@@ -166,39 +157,48 @@ class _MyAppState extends State<MyApp> {
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 5),
-            child: SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                  trackHeight: 2,
-                  thumbColor: Colors.blueAccent,
-                  overlayColor: Colors.blue,
-                  thumbShape: RoundSliderThumbShape(
-                    disabledThumbRadius: 5,
-                    enabledThumbRadius: 5,
+            child: Stack(
+              children: [
+                /*   Text(song.title,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w700)),  */
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    trackHeight: 2,
+                    thumbColor: Colors.pinkAccent,
+                    overlayColor: Colors.pink,
+                    thumbShape: RoundSliderThumbShape(
+                      disabledThumbRadius: 5,
+                      enabledThumbRadius: 5,
+                    ),
+                    overlayShape: RoundSliderOverlayShape(
+                      overlayRadius: 10,
+                    ),
+                    activeTrackColor: Colors.pinkAccent,
+                    inactiveTrackColor: Colors.grey,
                   ),
-                  overlayShape: RoundSliderOverlayShape(
-                    overlayRadius: 10,
+                  child: Slider(
+                    value: _slider ?? 0,
+                    onChanged: (value) {
+                      setState(() {
+                        _slider = value;
+                      });
+                    },
+                    onChangeEnd: (value) {
+                      if (audioManagerInstance.duration != null) {
+                        Duration msec = Duration(
+                            milliseconds:
+                                (audioManagerInstance.duration.inMilliseconds *
+                                        value)
+                                    .round());
+                        audioManagerInstance.seekTo(msec);
+                      }
+                    },
                   ),
-                  activeTrackColor: Colors.blueAccent,
-                  inactiveTrackColor: Colors.grey,
                 ),
-                child: Slider(
-                  value: _slider ?? 0,
-                  onChanged: (value) {
-                    setState(() {
-                      _slider = value;
-                    });
-                  },
-                  onChangeEnd: (value) {
-                    if (audioManagerInstance.duration != null) {
-                      Duration msec = Duration(
-                          milliseconds:
-                              (audioManagerInstance.duration.inMilliseconds *
-                                      value)
-                                  .round());
-                      audioManagerInstance.seekTo(msec);
-                    }
-                  },
-                )),
+              ],
+            ),
           ),
         ),
         Text(
@@ -212,8 +212,7 @@ class _MyAppState extends State<MyApp> {
   Widget bottomPanel() {
     return Container(
       //height: 800,
-      child: Column(
-          children: <Widget>[
+      child: Column(children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: songProgress(context),

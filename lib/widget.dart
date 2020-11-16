@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class IconText extends StatelessWidget {
   final IconData iconData;
@@ -30,7 +30,7 @@ class IconText extends StatelessWidget {
         Text(
           string,
           style: TextStyle(
-              color: Colors.red, fontSize: 10, fontWeight: FontWeight.w900),
+              color: Colors.white, fontSize: 10, fontWeight: FontWeight.w900),
         ),
       ],
     );
