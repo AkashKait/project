@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
           elevation: 0,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.grey,
           title: showVol
               ? Container(
                   height: 50,
@@ -125,7 +125,7 @@ class _MyAppState extends State<MyApp> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Expanded(
-              flex: 15,
+              flex: 20,
               child: Container(
                 color: Colors.grey[900],
                 child: FutureBuilder(
@@ -156,7 +156,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            Expanded(flex: 3, child: bottomPanel()),
+            Expanded(flex: 5, child: bottomPanel()),
           ],
         ),
       ),
@@ -245,15 +245,14 @@ class _MyAppState extends State<MyApp> {
   Widget bottomPanel() {
     return Container(
       color: Colors.black,
-      //height: 800,
       child: Column(children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           //child: songProgress(context),
         ),
         Container(
-          color: Colors.black,
-          padding: EdgeInsets.symmetric(vertical: 16),
+          color: Colors.grey[800],
+          padding: EdgeInsets.symmetric(vertical: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -299,6 +298,24 @@ class _MyAppState extends State<MyApp> {
               ),
             ],
           ),
+        ),
+        BottomNavigationBar(
+          backgroundColor: Colors.grey,
+            currentIndex: 0, // this will be set when a new tab is tapped
+            items: [
+            BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: new Text('Home'),
+            ),
+            BottomNavigationBarItem(
+            icon: new Icon(Icons.queue_music),
+            title: new Text('Playlist'),
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.music_note),
+            title: Text('Genre')
+            )
+            ],
         ),
       ]),
     );
