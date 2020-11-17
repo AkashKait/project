@@ -1,4 +1,6 @@
 //import 'dart:io';
+import 'package:flutter/painting.dart';
+
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
@@ -22,13 +24,15 @@ class SongWidget extends StatelessWidget {
                     .start("file://${song.filePath}", song.title,
                         desc: song.displayName,
                         auto: true,
-                        cover: "assets/images/p4.jpg")
+                        cover: "assets/images/p4.jpg"
+                )
+
                     .then((err) {
                   print(err);
                 });
               },
               child: Card(
-                color: Colors.pink[300],
+                color: Colors.pink[100],
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -59,19 +63,19 @@ class SongWidget extends StatelessWidget {
                                   Text("Release Year: ${song.year}",
                                       style: TextStyle(
                                           fontSize: 11,
-                                          color: Colors.grey,
+                                          color: Colors.pink[900],
                                           fontWeight: FontWeight.w500)),
                                   Text("Artist: ${song.artist}",
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           fontSize: 11,
-                                          color: Colors.grey,
+                                          color: Colors.pink[900],
                                           fontWeight: FontWeight.w500)),
                                   Text(
                                       "Duration: ${parseToMinutesSeconds(int.parse(song.duration))} min",
                                       style: TextStyle(
                                           fontSize: 11,
-                                          color: Colors.grey,
+                                          color: Colors.pink[900],
                                           fontWeight: FontWeight.w500)),
                                 ],
                               ),

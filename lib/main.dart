@@ -99,16 +99,23 @@ class _MyAppState extends State<MyApp> {
                 )
               : Row(
                 children: [
-                  Image.asset(
-                      'assets/images/logo.png',
+                  Container(
+                    decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(9.0)),
+
+      ),
+                    child: Image.asset(
+                        'assets/images/logo1.png',
+
             height: 50,
             width: 50,
-                    ),
+                      ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       "Hertz",
-                      style: TextStyle(color: Colors.pink),
+                      style: TextStyle(color: Colors.pink[100]),
                     ),
                   )
                 ],
@@ -263,7 +270,7 @@ class _MyAppState extends State<MyApp> {
               ),
               CircleAvatar(
                 radius: 30,
-                backgroundColor: Colors.pink,
+                backgroundColor: Colors.pink[300],
                 child: Center(
                   child: IconButton(
                     onPressed: () async {
