@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:audio_manager/audio_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
@@ -60,7 +62,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        drawer: Drawer(),
+        //drawer: Drawer(),
         appBar: AppBar(
           actions: <Widget>[
             InkWell(
@@ -84,6 +86,8 @@ class _MyAppState extends State<MyApp> {
               ? Container(
                   height: 50,
                   child: Slider(
+                    activeColor: Colors.pink,
+                    inactiveColor: Colors.grey[200],
                     value: audioManagerInstance.volume ?? 0,
                     onChanged: (value) {
                       setState(() {
@@ -93,14 +97,20 @@ class _MyAppState extends State<MyApp> {
                     },
                   ),
                 )
-              : Text("Hertz"),
+              : Image.asset(
+
+                  'assets/images/logo.png',
+             height: 50,
+            width: 50,
+                ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Expanded(
-              flex: 10,
+              flex: 15,
               child: Container(
+                color: Colors.grey[900],
                 child: FutureBuilder(
                   future: FlutterAudioQuery()
                       .getSongs(sortType: SongSortType.DEFAULT),
@@ -129,7 +139,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            Expanded(flex: 2, child: bottomPanel()),
+            Expanded(flex: 3, child: bottomPanel()),
           ],
         ),
       ),
@@ -148,64 +158,71 @@ class _MyAppState extends State<MyApp> {
 
   Widget songProgress(BuildContext context) {
     var style = TextStyle(color: Colors.black);
-    return Row(
-      children: <Widget>[
-        Text(
-          _formatDuration(audioManagerInstance.position),
-          style: style,
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: Stack(
-              children: [
-                /*   Text(song.title,
-                                      style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w700)),  */
-                SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    trackHeight: 2,
-                    thumbColor: Colors.pinkAccent,
-                    overlayColor: Colors.pink,
-                    thumbShape: RoundSliderThumbShape(
-                      disabledThumbRadius: 5,
-                      enabledThumbRadius: 5,
+    return Padding(
+      padding: const EdgeInsets.all(0),
+      child: Row(
+        children: <Widget>[
+          Text(
+            _formatDuration(audioManagerInstance.position),
+            style: TextStyle(color :Colors.white,backgroundColor: Colors.black,),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric( horizontal: 0),
+              child: Stack(
+                children: [
+                  /*   Text(song.title,
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w700)),  */
+                  Container(
+                    color : Colors.black45,
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        trackHeight: 2,
+                        thumbColor: Colors.pinkAccent,
+                        overlayColor: Colors.pink,
+                        thumbShape: RoundSliderThumbShape(
+                          disabledThumbRadius: 5,
+                          enabledThumbRadius: 5,
+                        ),
+                        overlayShape: RoundSliderOverlayShape(
+                          overlayRadius: 10,
+                        ),
+                        activeTrackColor: Colors.pinkAccent,
+                        inactiveTrackColor: Colors.grey,
+                      ),
+                      child: Slider(
+                        value: _slider ?? 0,
+                        onChanged: (value) {
+                          setState(() {
+                            _slider = value;
+                          });
+                        },
+                        onChangeEnd: (value) {
+                          if (audioManagerInstance.duration != null) {
+                            Duration msec = Duration(
+                                milliseconds:
+                                    (audioManagerInstance.duration.inMilliseconds *
+                                            value)
+                                        .round());
+                            audioManagerInstance.seekTo(msec);
+                          }
+                        },
+                      ),
                     ),
-                    overlayShape: RoundSliderOverlayShape(
-                      overlayRadius: 10,
-                    ),
-                    activeTrackColor: Colors.pinkAccent,
-                    inactiveTrackColor: Colors.grey,
                   ),
-                  child: Slider(
-                    value: _slider ?? 0,
-                    onChanged: (value) {
-                      setState(() {
-                        _slider = value;
-                      });
-                    },
-                    onChangeEnd: (value) {
-                      if (audioManagerInstance.duration != null) {
-                        Duration msec = Duration(
-                            milliseconds:
-                                (audioManagerInstance.duration.inMilliseconds *
-                                        value)
-                                    .round());
-                        audioManagerInstance.seekTo(msec);
-                      }
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        Text(
-          _formatDuration(audioManagerInstance.duration),
-          style: style,
-        ),
-      ],
+          Text(
+
+            _formatDuration(audioManagerInstance.duration),
+            style: TextStyle(color: Colors.white,backgroundColor: Colors.black,),
+          ),
+        ],
+      ),
     );
   }
 
@@ -218,6 +235,7 @@ class _MyAppState extends State<MyApp> {
           child: songProgress(context),
         ),
         Container(
+          color: Colors.black,
           padding: EdgeInsets.symmetric(vertical: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -227,14 +245,15 @@ class _MyAppState extends State<MyApp> {
                   child: IconButton(
                       icon: Icon(
                         Icons.skip_previous,
-                        color: Colors.white,
+                        color: Colors.grey[100],
                       ),
                       onPressed: () => audioManagerInstance.previous()),
                 ),
-                backgroundColor: Colors.cyan.withOpacity(0.3),
+                backgroundColor: Colors.pinkAccent.withOpacity(0.3),
               ),
               CircleAvatar(
                 radius: 30,
+                backgroundColor: Colors.pink,
                 child: Center(
                   child: IconButton(
                     onPressed: () async {
@@ -245,18 +264,18 @@ class _MyAppState extends State<MyApp> {
                       audioManagerInstance.isPlaying
                           ? Icons.pause
                           : Icons.play_arrow,
-                      color: Colors.white,
+                      color: Colors.pink[50],
                     ),
                   ),
                 ),
               ),
               CircleAvatar(
-                backgroundColor: Colors.cyan.withOpacity(0.3),
+                backgroundColor: Colors.pinkAccent.withOpacity(0.3),
                 child: Center(
                   child: IconButton(
                       icon: Icon(
                         Icons.skip_next,
-                        color: Colors.white,
+                        color: Colors.grey[100],
                       ),
                       onPressed: () => audioManagerInstance.next()),
                 ),
