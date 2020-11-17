@@ -28,6 +28,7 @@ class SongWidget extends StatelessWidget {
                 });
               },
               child: Card(
+                color: Colors.pink[300],
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
                 iconColor: Colors.white,
                 string: "",
                 iconSize: 30,
-                iconData: Icons.volume_up_outlined,
+                iconData: Icons.volume_up,
               ),
             ),
           ],
@@ -97,12 +97,22 @@ class _MyAppState extends State<MyApp> {
                     },
                   ),
                 )
-              : Image.asset(
-
-                  'assets/images/logo.png',
-             height: 50,
+              : Row(
+                children: [
+                  Image.asset(
+                      'assets/images/logo.png',
+            height: 50,
             width: 50,
-                ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      "Hertz",
+                      style: TextStyle(color: Colors.pink),
+                    ),
+                  )
+                ],
+              ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -157,7 +167,6 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget songProgress(BuildContext context) {
-    var style = TextStyle(color: Colors.black);
     return Padding(
       padding: const EdgeInsets.all(0),
       child: Row(
@@ -228,11 +237,12 @@ class _MyAppState extends State<MyApp> {
 
   Widget bottomPanel() {
     return Container(
+      color: Colors.black,
       //height: 800,
       child: Column(children: <Widget>[
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: songProgress(context),
+          //child: songProgress(context),
         ),
         Container(
           color: Colors.black,

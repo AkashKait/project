@@ -17,22 +17,10 @@ class IconText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Icon(
+    return Icon(
           iconData,
           size: iconSize,
           color: iconColor,
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        Text(
-          string,
-          style: TextStyle(
-              color: Colors.white, fontSize: 10, fontWeight: FontWeight.w900),
-        ),
-      ],
     );
   }
 }
