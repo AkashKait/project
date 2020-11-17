@@ -16,7 +16,6 @@ dependencies:
   audio_manager:
   flutter_xlider: ^3.4.0
   font_awesome_flutter: ^8.10.0
-  
    
 dev_dependencies:
   flutter_test:

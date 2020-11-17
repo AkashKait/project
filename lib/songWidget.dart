@@ -1,7 +1,7 @@
 //import 'dart:io';
 import 'package:flutter/painting.dart';
 
-import 'main.dart';
+import 'homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 //import 'package:flutter_music_player/widget.dart';
