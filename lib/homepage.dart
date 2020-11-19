@@ -78,7 +78,7 @@ class _HomepageState extends State<Homepage> {
             ),
           ],
           elevation: 0,
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.grey[600],
           title: showVol
               ? Container(
             height: 50,
@@ -317,20 +317,20 @@ class _HomepageState extends State<Homepage> {
 
                 items: [
                   BottomNavigationBarItem(
-                    icon: new Icon(Icons.home),
+                    icon: new Icon(Icons.home,color: Colors.white,),
                     title: new Text('Home'),
-                    label: "1",
+                    
 
                   ),
                   BottomNavigationBarItem(
-                    icon: new Icon(Icons.queue_music),
+                    icon: new Icon(Icons.queue_music, color: Colors.white,),
                     title: new Text('Playlist'),
-                    label: "2",
+
                   ),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.music_note),
+                      icon: Icon(Icons.music_note,color: Colors.white,),
                       title: Text('Genre'),
-                      label: "3",
+
                   )
                 ],
               ),
