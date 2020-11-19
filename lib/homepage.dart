@@ -78,7 +78,7 @@ class _HomepageState extends State<Homepage> {
             ),
           ],
           elevation: 0,
-          backgroundColor: Colors.grey[600],
+          backgroundColor: Colors.grey[900],
           title: showVol
               ? Container(
             height: 50,
@@ -124,7 +124,7 @@ class _HomepageState extends State<Homepage> {
             Expanded(
               flex: 20,
               child: Container(
-                color: Colors.grey[900],
+                color: Colors.grey[600],
                 child: FutureBuilder(
                   future: FlutterAudioQuery()
                       .getSongs(sortType: SongSortType.DEFAULT),
@@ -312,7 +312,7 @@ class _HomepageState extends State<Homepage> {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical:3),
               child: BottomNavigationBar(
-                backgroundColor: Colors.grey[600],
+                backgroundColor: Colors.grey[900],
                 currentIndex: 0, // this will be set when a new tab is tapped
 
                 items: [
