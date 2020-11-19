@@ -306,7 +306,7 @@ class _HomepageState extends State<Homepage> {
           child: Container(
             decoration: BoxDecoration(
               gradient: new LinearGradient(
-                colors: [Colors.red, Colors.cyan],
+                colors: [Colors.black, Colors.pinkAccent , Colors.black],
               ),
             ),
             child: Padding(
