@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:audio_manager/audio_manager.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +55,7 @@ class _HomepageState extends State<Homepage> {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -239,6 +239,7 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
+
   Widget bottomPanel() {
     return Container(
       color: Colors.black,
@@ -313,18 +314,23 @@ class _HomepageState extends State<Homepage> {
               child: BottomNavigationBar(
                 backgroundColor: Colors.grey[600],
                 currentIndex: 0, // this will be set when a new tab is tapped
+
                 items: [
                   BottomNavigationBarItem(
                     icon: new Icon(Icons.home),
                     title: new Text('Home'),
+                    label: "1",
+
                   ),
                   BottomNavigationBarItem(
                     icon: new Icon(Icons.queue_music),
                     title: new Text('Playlist'),
+                    label: "2",
                   ),
                   BottomNavigationBarItem(
                       icon: Icon(Icons.music_note),
-                      title: Text('Genre')
+                      title: Text('Genre'),
+                      label: "3",
                   )
                 ],
               ),
