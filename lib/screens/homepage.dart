@@ -34,17 +34,17 @@ class _HomepageState extends State<Homepage> {
         iconSize: 30,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.my_library_music),
             title: Text("Home"),
             backgroundColor: Colors.deepPurple,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            title: Text("Equilizer"),
+            icon: Icon(Icons.equalizer_rounded),
+            title: Text("Equalizer"),
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
+            icon: Icon(Icons.music_note_rounded),
             title: Text("Genre"),
             backgroundColor: Colors.black,
           ),
