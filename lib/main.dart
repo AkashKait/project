@@ -1,8 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_music_player/homepage.dart';
+import 'file:///C:/Users/balra/AndroidStudioProjects/project/lib/screens/homepage.dart';
 import 'package:flutter/services.dart';
-
+import 'package:flutter_music_player/screens/home_tab.dart';
+//import 'package:flutter_music_player/screens/homepage.dart';
 
 void main() {
   runApp(MyApp());
