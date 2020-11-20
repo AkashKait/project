@@ -18,7 +18,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int _currentIndex = 0;
-  final tabs = [HomeTab(), EquilizerTab(), GenreTab()];
+  final tabs = [HomeTab(), EqualizerTab(), GenreTab()];
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,12 @@ class _HomepageState extends State<Homepage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.my_library_music),
             title: Text("Home"),
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.equalizer_rounded),
             title: Text("Equalizer"),
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.music_note_rounded),

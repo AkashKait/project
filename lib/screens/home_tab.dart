@@ -18,6 +18,8 @@ class _HomeTabState extends State<HomeTab> {
     setupAudio();
   }
 
+
+
   void setupAudio() {
     audioManagerInstance.onEvents((events, args) {
       switch (events) {
@@ -48,7 +50,6 @@ class _HomeTabState extends State<HomeTab> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -107,7 +108,7 @@ class _HomeTabState extends State<HomeTab> {
                         "Hertz",
                         style: TextStyle(color: Colors.pink[100]),
                       ),
-                    )
+                    ),
                   ],
                 ),
         ),
@@ -165,7 +166,10 @@ Widget bottomPanel() {
       Expanded(
         flex: 3,
         child: Container(
-          color: Colors.grey[800],
+          decoration: BoxDecoration(
+            color: Colors.grey[500].withOpacity(1),
+
+          ),
           padding: EdgeInsets.symmetric(vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -174,7 +178,7 @@ Widget bottomPanel() {
                 child: Center(
                   child: IconButton(
                       icon: Icon(
-                        Icons.skip_previous,
+                        Icons.skip_previous_rounded,
                         color: Colors.grey[100],
                       ),
                       onPressed: () => audioManagerInstance.previous()),
@@ -193,7 +197,7 @@ Widget bottomPanel() {
                     icon: Icon(
                       audioManagerInstance.isPlaying
                           ? Icons.pause
-                          : Icons.play_arrow,
+                          : Icons.play_arrow_rounded,
                       color: Colors.pink[50],
                     ),
                   ),
@@ -204,7 +208,7 @@ Widget bottomPanel() {
                 child: Center(
                   child: IconButton(
                       icon: Icon(
-                        Icons.skip_next,
+                        Icons.skip_next_rounded,
                         color: Colors.grey[100],
                       ),
                       onPressed: () => audioManagerInstance.next()),

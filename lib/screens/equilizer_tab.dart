@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:equalizer/equalizer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
+import 'home_tab.dart';
 
-
-class EquilizerTab extends StatefulWidget {
+class EqualizerTab extends StatefulWidget {
   @override
-  _EquilizerTabState createState() => _EquilizerTabState();
-  static final String id = "equilizer_tab";
+  _EqualizerTabState createState() => _EqualizerTabState();
+  static final String id = "equializer_tab";
 }
 
-class _EquilizerTabState extends State<EquilizerTab> {
+class _EqualizerTabState extends State<EqualizerTab> {
   bool enableCustomEQ = false;
 
   @override
@@ -31,57 +31,78 @@ class _EquilizerTabState extends State<EquilizerTab> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Equalizer example'),
+          backgroundColor: Colors.grey[900],
+          title: Expanded(
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/images/logo1.png',
+                  height: 50,
+                  width: 50,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    "Hertz",
+                    style: TextStyle(color: Colors.pink[100]),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-        body: ListView(
-          children: [
-            SizedBox(height: 10.0),
-            Center(
-              child: Builder(
-                builder: (context) {
-                  return FlatButton.icon(
-                    icon: Icon(Icons.equalizer),
-                    label: Text('Open device equalizer'),
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    onPressed: () async {
-                      try {
-                        await Equalizer.open(0);
-                      } on PlatformException catch (e) {
-                        final snackBar = SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          content: Text('${e.message}\n${e.details}'),
-                        );
-                        Scaffold.of(context).showSnackBar(snackBar);
-                      }
-                    },
-                  );
+        body: Container(
+          color: Colors.grey[600],
+          child: ListView(
+            children: [
+              SizedBox(height: 10.0),
+              Center(
+                child: Builder(
+                  builder: (context) {
+                    return FlatButton.icon(
+                      icon: Icon(Icons.equalizer_rounded),
+                      label: Text('Open device equalizer'),
+                      color: Colors.pink,
+                      textColor: Colors.white,
+                      onPressed: () async {
+                        try {
+                          await Equalizer.open(0);
+                        } on PlatformException catch (e) {
+                          final snackBar = SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text('${e.message}\n${e.details}'),
+                          );
+                          Scaffold.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Container(
+                color: Colors.grey[400].withOpacity(1),
+                child: SwitchListTile(
+                  title: Text('Custom Equalizer'),
+                  value: enableCustomEQ,
+                  onChanged: (value) {
+                    Equalizer.setEnabled(value);
+                    setState(() {
+                      enableCustomEQ = value;
+                    });
+                  },
+                ),
+              ),
+              FutureBuilder<List<int>>(
+                future: Equalizer.getBandLevelRange(),
+                builder: (context, snapshot) {
+                  return snapshot.connectionState == ConnectionState.done
+                      ? CustomEQ(enableCustomEQ, snapshot.data)
+                      : CircularProgressIndicator();
                 },
               ),
-            ),
-            SizedBox(height: 10.0),
-            Container(
-              color: Colors.grey.withOpacity(0.1),
-              child: SwitchListTile(
-                title: Text('Custom Equalizer'),
-                value: enableCustomEQ,
-                onChanged: (value) {
-                  Equalizer.setEnabled(value);
-                  setState(() {
-                    enableCustomEQ = value;
-                  });
-                },
-              ),
-            ),
-            FutureBuilder<List<int>>(
-              future: Equalizer.getBandLevelRange(),
-              builder: (context, snapshot) {
-                return snapshot.connectionState == ConnectionState.done
-                    ? CustomEQ(enableCustomEQ, snapshot.data)
-                    : CircularProgressIndicator();
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -120,21 +141,23 @@ class _CustomEQState extends State<CustomEQ> {
       builder: (context, snapshot) {
         return snapshot.connectionState == ConnectionState.done
             ? Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: snapshot.data
-                  .map((freq) => _buildSliderBand(freq, bandId++))
-                  .toList(),
-            ),
-            Divider(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _buildPresets(),
-            ),
-          ],
-        )
-            : CircularProgressIndicator();
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: snapshot.data
+                        .map((freq) => _buildSliderBand(freq, bandId++))
+                        .toList(),
+                  ),
+                  Divider(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: _buildPresets(),
+                  ),
+                ],
+              )
+            : CircularProgressIndicator(
+                backgroundColor: Colors.blue,
+              );
       },
     );
   }
@@ -181,11 +204,11 @@ class _CustomEQState extends State<CustomEQ> {
             value: _selectedValue,
             onChanged: widget.enabled
                 ? (String value) {
-              Equalizer.setPreset(value);
-              setState(() {
-                _selectedValue = value;
-              });
-            }
+                    Equalizer.setPreset(value);
+                    setState(() {
+                      _selectedValue = value;
+                    });
+                  }
                 : null,
             items: presets.map((String value) {
               return DropdownMenuItem<String>(
@@ -197,7 +220,9 @@ class _CustomEQState extends State<CustomEQ> {
         } else if (snapshot.hasError)
           return Text(snapshot.error);
         else
-          return CircularProgressIndicator();
+          return CircularProgressIndicator(
+
+          );
       },
     );
   }
