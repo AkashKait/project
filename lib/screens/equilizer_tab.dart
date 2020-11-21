@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:equalizer/equalizer.dart';
 import 'package:flutter/services.dart';
@@ -83,6 +84,8 @@ class _EqualizerTabState extends State<EqualizerTab> {
               Container(
                 color: Colors.grey[400].withOpacity(1),
                 child: SwitchListTile(
+                  activeColor: Colors.pink,
+                  inactiveThumbColor: Colors.black,
                   title: Text('Custom Equalizer'),
                   value: enableCustomEQ,
                   onChanged: (value) {
@@ -184,7 +187,7 @@ class _CustomEQState extends State<CustomEQ> {
             },
           ),
         ),
-        Text('${freq ~/ 1000} Hz'),
+        Text('${freq ~/ 1000} Hz',style: TextStyle(color: Colors.pink[700]),),
       ],
     );
   }
@@ -199,6 +202,7 @@ class _CustomEQState extends State<CustomEQ> {
           return DropdownButtonFormField(
             decoration: InputDecoration(
               labelText: 'Available Presets',
+              labelStyle: TextStyle(color: Colors.black),
               border: OutlineInputBorder(),
             ),
             value: _selectedValue,
@@ -213,7 +217,7 @@ class _CustomEQState extends State<CustomEQ> {
             items: presets.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value,style: TextStyle(color: Colors.pink),),
               );
             }).toList(),
           );

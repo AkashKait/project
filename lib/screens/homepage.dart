@@ -28,34 +28,47 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       body: tabs[_currentIndex],
       // backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        currentIndex: _currentIndex,
-        iconSize: 30,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.my_library_music),
-            title: Text("Home"),
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.equalizer_rounded),
-            title: Text("Equalizer"),
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.music_note_rounded),
-            title: Text("Genre"),
-            backgroundColor: Colors.black,
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+      bottomNavigationBar: bottomPanel(),);}
+
+Widget bottomPanel( ){
+      return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.black,Colors.pink,Colors.black],
+        )
       ),
-    );
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: BottomNavigationBar(
+            backgroundColor: Colors.grey[900],
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _currentIndex,
+            iconSize: 30,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.my_library_music,color: Colors.pinkAccent),
+                title: Text("Home",style: TextStyle(color: Colors.white),),
+                backgroundColor: Colors.white,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.equalizer_rounded,color: Colors.pinkAccent),
+                title: Text("Equalizer",style: TextStyle(color: Colors.white),),
+                backgroundColor: Colors.white,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.music_note_rounded,color: Colors.pinkAccent),
+                title: Text("Genre",style: TextStyle(color: Colors.white),),
+                backgroundColor: Colors.white,
+              ),
+            ],
+            onTap: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
+        ),
+      );
   }
 
 // String _formatDuration(Duration d) {

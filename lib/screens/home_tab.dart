@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:audio_manager/audio_manager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 
@@ -94,7 +97,7 @@ class _HomeTabState extends State<HomeTab> {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       child: Image.asset(
                         'assets/images/logo1.png',
@@ -154,72 +157,88 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 }
+double _sigmaX = 0; // from 0-10
+double _sigmaY = 0; // from 0-10
+double _opacity = 0.8; // from 0-1.0
 
 Widget bottomPanel() {
-  return Container(
-    color: Colors.black,
-    child: Column(children: <Widget>[
-      // Padding(
-      //   padding: EdgeInsets.symmetric(horizontal: 16),
-      //   child: songProgress(context),
-      // ),
-      Expanded(
-        flex: 3,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[500].withOpacity(1),
+  return Column(children: <Widget>[
+    // Padding(
+    //   padding: EdgeInsets.symmetric(horizontal: 16),
+    //   child: songProgress(context),
+    // ),
+    Expanded(
+      flex: 3,
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration
+              (
+              border: Border.all(color: Colors.black,width: 2),
 
-          ),
-          padding: EdgeInsets.symmetric(vertical: 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              CircleAvatar(
-                child: Center(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.skip_previous_rounded,
-                        color: Colors.grey[100],
-                      ),
-                      onPressed: () => audioManagerInstance.previous()),
-                ),
-                backgroundColor: Colors.pinkAccent.withOpacity(0.3),
+
+              image: DecorationImage(
+                  image: AssetImage('assets/images/p6.jpg'),
+                fit: BoxFit.cover,
               ),
-              CircleAvatar(
-                radius: 30,
-                backgroundColor: Colors.pink[300],
-                child: Center(
-                  child: IconButton(
-                    onPressed: () async {
-                      audioManagerInstance.playOrPause();
-                    },
-                    padding: const EdgeInsets.all(0.0),
-                    icon: Icon(
-                      audioManagerInstance.isPlaying
-                          ? Icons.pause
-                          : Icons.play_arrow_rounded,
-                      color: Colors.pink[50],
+            ),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical:20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    CircleAvatar(
+                      child: Center(
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.fast_rewind_rounded,
+                              color: Colors.grey[100],
+                            ),
+                            onPressed: () => audioManagerInstance.previous()),
+                      ),
+                      backgroundColor: Colors.pinkAccent.withOpacity(0.3),
                     ),
-                  ),
-                ),
-              ),
-              CircleAvatar(
-                backgroundColor: Colors.pinkAccent.withOpacity(0.3),
-                child: Center(
-                  child: IconButton(
-                      icon: Icon(
-                        Icons.skip_next_rounded,
-                        color: Colors.grey[100],
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.pink[300],
+                      child: Center(
+                        child: IconButton(
+                          onPressed: () async {
+                            audioManagerInstance.playOrPause();
+                          },
+                          padding: const EdgeInsets.all(0.0),
+                          icon: Icon(
+                            audioManagerInstance.isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow_rounded,
+                            color: Colors.pink[50],
+                          ),
+                        ),
                       ),
-                      onPressed: () => audioManagerInstance.next()),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.pinkAccent.withOpacity(0.3),
+                      child: Center(
+                        child: IconButton(
+                            icon: Icon(
+                              Icons.fast_forward_rounded,
+                              color: Colors.grey[100],
+                            ),
+                            onPressed: () => audioManagerInstance.next()),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+
+        ],
       ),
-    ]),
-  );
+    ),
+  ]);
 }
 
 var audioManagerInstance = AudioManager.instance;
