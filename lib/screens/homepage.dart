@@ -5,7 +5,6 @@ import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:flutter_music_player/songWidget.dart';
 import 'package:flutter_music_player/widget.dart';
 import 'package:flutter/services.dart';
-
 import 'equilizer_tab.dart';
 import 'genre_tab.dart';
 import 'home_tab.dart';
@@ -28,47 +27,57 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       body: tabs[_currentIndex],
       // backgroundColor: Colors.white,
-      bottomNavigationBar: bottomPanel(),);}
+      bottomNavigationBar: bottomPanel(),
+    );
+  }
 
-Widget bottomPanel( ){
-      return Container(
+  Widget bottomPanel() {
+    return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.black,Colors.pink,Colors.black],
-        )
-      ),
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
-          child: BottomNavigationBar(
-            backgroundColor: Colors.grey[900],
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _currentIndex,
-            iconSize: 30,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.my_library_music,color: Colors.pinkAccent),
-                title: Text("Home",style: TextStyle(color: Colors.white),),
-                backgroundColor: Colors.white,
+          gradient: LinearGradient(
+        colors: [Colors.black, Colors.pink, Colors.black],
+      )),
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: BottomNavigationBar(
+          backgroundColor: Colors.grey[900],
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentIndex,
+          iconSize: 30,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.my_library_music, color: Colors.pinkAccent),
+              title: Text(
+                "Home",
+                style: TextStyle(color: Colors.white),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.equalizer_rounded,color: Colors.pinkAccent),
-                title: Text("Equalizer",style: TextStyle(color: Colors.white),),
-                backgroundColor: Colors.white,
+              backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.equalizer_rounded, color: Colors.pinkAccent),
+              title: Text(
+                "Equalizer",
+                style: TextStyle(color: Colors.white),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.music_note_rounded,color: Colors.pinkAccent),
-                title: Text("Genre",style: TextStyle(color: Colors.white),),
-                backgroundColor: Colors.white,
+              backgroundColor: Colors.white,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.music_note_rounded, color: Colors.pinkAccent),
+              title: Text(
+                "Genre",
+                style: TextStyle(color: Colors.white),
               ),
-            ],
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-          ),
+              backgroundColor: Colors.white,
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
         ),
-      );
+      ),
+    );
   }
 
 // String _formatDuration(Duration d) {

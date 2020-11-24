@@ -21,8 +21,6 @@ class _HomeTabState extends State<HomeTab> {
     setupAudio();
   }
 
-
-
   void setupAudio() {
     audioManagerInstance.onEvents((events, args) {
       switch (events) {
@@ -53,6 +51,7 @@ class _HomeTabState extends State<HomeTab> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -106,15 +105,18 @@ class _HomeTabState extends State<HomeTab> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(16,16,0,16),
+                      padding: const EdgeInsets.fromLTRB(16, 16, 0, 16),
                       child: Text(
                         "Hertz",
                         style: TextStyle(color: Colors.pink[100]),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(5,8,0, 0),
-                      child: Text("A complete musical app",textScaleFactor: 0.4,),
+                      padding: const EdgeInsets.fromLTRB(5, 8, 0, 0),
+                      child: Text(
+                        "A complete musical app",
+                        textScaleFactor: 0.4,
+                      ),
                     ),
                   ],
                 ),
@@ -161,11 +163,12 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 }
+
 double _sigmaX = 0; // from 0-10
 double _sigmaY = 0; // from 0-10
 double _opacity = 0.8; // from 0-1.0
 
-Widget bottomPanel()  {
+Widget bottomPanel() {
   return Column(children: <Widget>[
     // Padding(
     //   padding: EdgeInsets.symmetric(horizontal: 16),
@@ -176,20 +179,19 @@ Widget bottomPanel()  {
       child: Column(
         children: [
           Container(
-            decoration: BoxDecoration
-              (
-              border: Border.all(color: Colors.black,width: 2),
-
-
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 2),
               image: DecorationImage(
-                  image: AssetImage('assets/images/p6.jpg'),
+                image: AssetImage('assets/images/p6.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical:20.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20.0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -238,7 +240,6 @@ Widget bottomPanel()  {
               ),
             ),
           ),
-
         ],
       ),
     ),

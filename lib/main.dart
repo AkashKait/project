@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_music_player/screens/splash_screen.dart';
 // import 'package:flutter_music_player/screens/home_tab.dart';
 import 'screens/homepage.dart';
 
@@ -21,8 +22,9 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitUp,
     ]);
     return MaterialApp(
-      initialRoute: Homepage.id,
+      initialRoute: SplashScreen.id,
       routes: {
+        SplashScreen.id: (context) => SplashScreen(),
         Homepage.id: (context) => Homepage(),
       },
     );
