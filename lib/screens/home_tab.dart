@@ -106,11 +106,15 @@ class _HomeTabState extends State<HomeTab> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.fromLTRB(16,16,0,16),
                       child: Text(
                         "Hertz",
                         style: TextStyle(color: Colors.pink[100]),
                       ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(5,8,0, 0),
+                      child: Text("A complete musical app",textScaleFactor: 0.4,),
                     ),
                   ],
                 ),
@@ -161,7 +165,7 @@ double _sigmaX = 0; // from 0-10
 double _sigmaY = 0; // from 0-10
 double _opacity = 0.8; // from 0-1.0
 
-Widget bottomPanel() {
+Widget bottomPanel()  {
   return Column(children: <Widget>[
     // Padding(
     //   padding: EdgeInsets.symmetric(horizontal: 16),

@@ -36,12 +36,16 @@ class _GenreTabState extends State<GenreTab> {
                     width: 50,
                   ),
                   Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        "Hertz",
-                        style: TextStyle(color: Colors.pink[100]),
-                      )
-                  )
+                    padding: const EdgeInsets.fromLTRB(16,16,0,16),
+                    child: Text(
+                      "Hertz",
+                      style: TextStyle(color: Colors.pink[100]),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5,8,0, 0),
+                    child: Text("A complete musical app",textScaleFactor: 0.4,),
+                  ),
                 ],
               )
           ),

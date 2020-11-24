@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 // import 'package:flutter_music_player/screens/home_tab.dart';
-
 import 'screens/homepage.dart';
 
 void main() {

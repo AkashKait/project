@@ -42,11 +42,15 @@ class _EqualizerTabState extends State<EqualizerTab> {
                   width: 50,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.fromLTRB(16,16,0,16),
                   child: Text(
                     "Hertz",
                     style: TextStyle(color: Colors.pink[100]),
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5,8,0, 0),
+                  child: Text("A complete musical app",textScaleFactor: 0.4,),
                 ),
               ],
             ),
@@ -151,7 +155,7 @@ class _CustomEQState extends State<CustomEQ> {
                         .map((freq) => _buildSliderBand(freq, bandId++))
                         .toList(),
                   ),
-                  Divider(),
+                  Divider(thickness: 1,),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: _buildPresets(),
@@ -159,7 +163,7 @@ class _CustomEQState extends State<CustomEQ> {
                 ],
               )
             : CircularProgressIndicator(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.pink,
               );
       },
     );
@@ -187,7 +191,7 @@ class _CustomEQState extends State<CustomEQ> {
             },
           ),
         ),
-        Text('${freq ~/ 1000} Hz',style: TextStyle(color: Colors.pink[700]),),
+        Text('${freq ~/ 1000} Hz',style: TextStyle(color: Colors.black),),
       ],
     );
   }
@@ -202,7 +206,7 @@ class _CustomEQState extends State<CustomEQ> {
           return DropdownButtonFormField(
             decoration: InputDecoration(
               labelText: 'Available Presets',
-              labelStyle: TextStyle(color: Colors.black),
+              labelStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
               border: OutlineInputBorder(),
             ),
             value: _selectedValue,
@@ -217,7 +221,7 @@ class _CustomEQState extends State<CustomEQ> {
             items: presets.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value,style: TextStyle(color: Colors.pink),),
+                child: Text(value,style: TextStyle(color: Colors.black),),
               );
             }).toList(),
           );
