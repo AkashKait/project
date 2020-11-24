@@ -180,7 +180,7 @@ Widget bottomPanel() {
         children: [
           Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.black, width: 2),
+              border: Border.all(color: Colors.black, width: 1),
               image: DecorationImage(
                 image: AssetImage('assets/images/p6.jpg'),
                 fit: BoxFit.cover,
